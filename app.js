@@ -31,6 +31,7 @@ require("./config/session.config")(app)
 //Routes🚀
 app.use('/', require('./routes/home'))
 app.use('/', require('./routes/auth'))
+app.use('/', require('./routes/places'))
 
 //App listener
 app.listen(PORT, () => {
