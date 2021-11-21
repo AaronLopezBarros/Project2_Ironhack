@@ -1,7 +1,6 @@
 <p>Places</p>
 {{#each places}}
 <ul>
-    <img src="{{../this.included.attributes.image.medium}}">
-    <li>{{this.attributes.long_name}}</li> 
+    <a href="/places/{{this.id}}"><li>{{this.attributes.long_name}}</li></a> 
 </ul>
 {{/each}}
