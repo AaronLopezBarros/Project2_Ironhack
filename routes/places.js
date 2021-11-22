@@ -108,7 +108,7 @@ router.post('/create/:id/:enum', isLoggedIn, async (req, res, next) => {
         res.redirect('/profile')
         return
     } 
-    if(!place || (place && place.status !== req.params.enum)) {
+    if(!place) {    //|| (place && place.status !== req.params.enum)
         const axiosCall = await axios(
             `https://api.roadgoat.com/api/v2/destinations/${req.params.id}`,
             {
@@ -135,7 +135,7 @@ router.post('/create/:id/:enum', isLoggedIn, async (req, res, next) => {
                  photo: photo,
                  users: [],
                  status: req.params.enum,
-                 cityId: req.params.id
+                 cityId: req.params.id 
              } 
              const createPlace = await Place.create(dataToUpload)
              const userLogged  = await User.findByIdAndUpdate(
