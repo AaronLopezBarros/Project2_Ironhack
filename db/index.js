@@ -1,9 +1,10 @@
+//VARIABLES
 const mongoose  = require('mongoose')
 const chalk     = require('chalk')
 
 const MONGO_URI = process.env.MONGODB_URI
 
-//Mongoose connect
+//MONGOOSE CONNECT
 
 const connectToMongo = async () => {
     try{

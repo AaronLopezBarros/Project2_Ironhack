@@ -6,6 +6,9 @@ h1{
     color:dimgrey;
     text-decoration: underline;
 }
+img{
+    border: 2px solid black;
+}
 #to-visit-img{
     max-width: 500px;
 }

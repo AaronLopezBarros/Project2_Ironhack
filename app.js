@@ -1,10 +1,10 @@
-//Middleware for .env
+//MIDDLEWARE FOR .ENV
 require('dotenv/config')
 
-//Import Mongo connection
+//IMPORT MONGO CONNECTION
 require('./db/index')
 
-//Variables
+//VARIABLES
 const PORT     = process.env.Port || 3000
 const express  = require('express')
 const app      = express()
@@ -13,27 +13,27 @@ const mongoose = require('mongoose')
 const chalk    = require('chalk')
 const cookieParser = require("cookie-parser")
 
-//Middleware for hbs
+//MIDDLEWARE FOR HBS
 app.set('view engine', 'hbs')
 app.set('views', __dirname + '/views')
 
-//Middleware de body parser
+//MIDDLEWARE FOR BODY PARSER
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser())
 
-//Middleware for static files
+//MIDDLEWARE FOR STATIC FILES
 app.use(express.static(__dirname + '/public'))
 
-//Middleware de sessions
+//MIDDLEWARE OF SESSIONS
 require("./config/session.config")(app)
 
-//Routes🚀
+//ROUTES🚀
 app.use('/', require('./routes/home'))
 app.use('/', require('./routes/auth'))
 app.use('/', require('./routes/places'))
 
-//App listener
+//APP LISTENER
 app.listen(PORT, () => {
     console.log(chalk.bgGreen(`Server running in port ${PORT}`))
 })

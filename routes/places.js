@@ -1,18 +1,21 @@
-//Variables
+//VARIABLES
 const router   = require('express').Router()
 const chalk    = require('chalk')
 const axios    = require('axios')
 const auth_key = Buffer.from(`06158c46a81fe6ca54de872a59d59bec:2c9853ff551e804fa5592a697f4661b1`).toString('base64')
+const {isLoggedIn} = require('../middleware/route-guard')
 
-//Models
+
+//MODELS
 const User  = require('../models/User.model.js')
 const Place = require('../models/Place.model.js')
 
-//Render places view
+//RENDER PLACES VIEW
 router.get('/places', async (req, res, next) => {
    res.render('places/places')
 })
 
+//SEARCH PLACE INFO AND RENDER VIEW
 router.get('/places/:id', async (req, res, next) => {
     try{
         const axiosCall = await axios(
@@ -43,7 +46,32 @@ router.get('/places/:id', async (req, res, next) => {
     }
    
 })
-//POST route for search places
+
+//ROUTE TO VISIT PAGE
+router.get('/profile/to-visit', isLoggedIn, async (req, res, next) =>{
+    const usserLogged   = await User.findById(req.session.loggedUser._id).populate('places')
+    const toVisitPlaces = []
+    usserLogged.places.forEach((place) => {
+        if(place.status === 'toVisit'){
+            toVisitPlaces.push(place)
+        }
+    })
+    res.render('users/toVisit', { toVisitPlaces })
+})
+
+//ROUTE ALREADY VISIT PAGE
+router.get('/profile/already-visited', isLoggedIn, async (req, res, next) =>{
+    const usserLogged   = await User.findById(req.session.loggedUser._id).populate('places')
+    const toVisitPlaces = []
+    usserLogged.places.forEach((place) => {
+        if(place.status === 'alreadyVisited'){
+            toVisitPlaces.push(place)
+        }
+    })
+    res.render('users/alreadyVisited', { toVisitPlaces })
+})
+
+//POST ROUTE FOR SEARCH PLACES
 router.post('/places', async (req, res, next) => {
     try{
         const axiosCall = await axios(
@@ -61,10 +89,10 @@ router.post('/places', async (req, res, next) => {
     
 })
 
-//Post create place
-router.post('/create/:id/:enum', async (req, res, next) => {
+//POST CREATE PLACE
+router.post('/create/:id/:enum', isLoggedIn, async (req, res, next) => {
     const place = await Place.findOne({cityId: req.params.id})
-    if(place) {
+    if(place && place.status === req.params.enum ) {
         const userLogged  = await User.findById(req.session.loggedUser._id,)
         if(!userLogged.places.includes(place._id)){
             userLogged.updateOne(
@@ -79,8 +107,8 @@ router.post('/create/:id/:enum', async (req, res, next) => {
         
         res.redirect('/profile')
         return
-    }
-    if(!place) {
+    } 
+    if(!place || (place && place.status !== req.params.enum)) {
         const axiosCall = await axios(
             `https://api.roadgoat.com/api/v2/destinations/${req.params.id}`,
             {

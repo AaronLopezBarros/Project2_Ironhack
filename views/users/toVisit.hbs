@@ -12,6 +12,9 @@
         </ul>
         {{/each}}
     </ul>
+    <form action="/delete/{{this.id}}" method="POST">
+        <button type="submit" >Delete place</button>
+    </form>
     {{/each}}
 
 

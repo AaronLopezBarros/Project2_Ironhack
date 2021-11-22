@@ -1,22 +1,23 @@
 //Variables
-const router = require('express').Router()
-const bcrypt = require('bcryptjs')
-const chalk  = require('chalk')
+const router         = require('express').Router()
+const bcrypt         = require('bcryptjs')
+const chalk          = require('chalk')
+const { isLoggedIn } = require('../middleware/route-guard')
 
 //Models
 const User = require('../models/User.model')
 
-//Render signup view
+//RENDER SIGNUP VIEW
 router.get('/signup', (req, res, next) => {
     res.render('users/signup')
 })
 
-//Render login view
+//RENDER LOGIN VIEW
 router.get('/login', (req, res, next) => {
     res.render('users/login')
 })
 
-//POST route to create User
+//POST ROUTE TO CREATE USER
 router.post('/signup', async (req, res, next) => {
     const { username, password, email, repeatPassword } = req.body
     
@@ -64,7 +65,7 @@ router.post('/signup', async (req, res, next) => {
     }
 })
 
-//POST for login
+//POST FOR LOGIN
 router.post('/login', async (req, res, next) => {
     const { username, password } = req.body
 
@@ -92,8 +93,8 @@ router.post('/login', async (req, res, next) => {
     res.redirect('/')
 })
 
-//POST logout
-router.get('/logout', async (req, res, next) => {
+//POST LOGOUT
+router.get('/logout', isLoggedIn, async (req, res, next) => {
     res.clearCookie('connect.sid', { path: '/' })
   
     try {

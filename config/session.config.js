@@ -1,9 +1,9 @@
-//Variables
+//VARIABLES
 const session    = require('express-session')
 
 const MongoStore = require('connect-mongo')
 
-//Session Create
+//SESSION CREATE
 
 module.exports = (app) => {
     app.set("trust proxy", 1);
