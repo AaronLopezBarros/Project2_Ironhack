@@ -1,19 +1,37 @@
 
-h1{
-    font-family: Arial, Helvetica, sans-serif;
-    font-weight: bold;
-    font-size: 100px;
-    color:dimgrey;
-    text-decoration: underline;
-}
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300&display=swap');
 img{
     border: 2px solid black;
+}
+nav{
+    font-family: Roboto;
+    font-weight: light;
+    font-size: 18px;
+    background-color: #f0f0f0;
 }
 #to-visit-img{
     max-width: 500px;
 }
-.align-title{
-    display: flex;
-    justify-content: center;
-    margin-top: 30px;
+#carousel img{
+    border: none;
+    border-radius: 15px;
+    
 }
+#traveller-title{
+    font-family: Roboto;
+    font-size: 30px;
+    font-weight: bold;
+    margin-left: 68px;
+    color: rgb(252 24 97)
+}
+.align-search{
+    margin-top: 12px;
+    margin-right: 68px;
+}
+.color-button{
+    background-color: rgb(252 24 97);
+    color: white;
+}
+
+
+
