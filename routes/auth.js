@@ -59,7 +59,6 @@ router.post('/signup', async (req, res, next) => {
             password: hashedPassword,
         })
         res.redirect('/login')
-        console.log(createUser)
     } catch(err){
         console.log(chalk.bgRed('Error:', err))
     }

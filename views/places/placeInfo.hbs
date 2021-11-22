@@ -1,0 +1,22 @@
+
+{{#if photo}}
+<img src="{{photo}}" alt="{{place.attributes.long_name}}">
+{{/if}}
+    <ul>
+        <li>Name:{{place.attributes.long_name}}</li>
+        <li>Destination type:{{place.attributes.destination_type}}</li>
+        <li>Population:{{place.attributes.population}}</li>
+        <li>Average_rating:{{place.attributes.average_rating}}</li>
+        {{#each place.attributes.alternate_names}}
+        <ul>
+            <li>Alternate Names:{{this}}</li>
+        </ul>
+        {{/each}}
+    </ul>
+    <form action="/create/{{place.id}}/toVisit" method="POST">
+        <button type="submit">To Visit</button>
+    </form>
+    <form action="/create/{{place.id}}/alreadyVisited" method="POST">
+        <button type="submit">Already Visited</button>
+    </form>
+

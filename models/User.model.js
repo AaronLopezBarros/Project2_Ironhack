@@ -2,7 +2,7 @@ const { Schema, model } = require('mongoose')
 
 const userSchema        = new Schema(
     {
-        username: { type: String,},
+        username: { type: String },
         password: { type: String },
         email: {
             type: String,
@@ -10,6 +10,7 @@ const userSchema        = new Schema(
             required: [true, "Can't be blank"],
             match: [/\S+@\S+\.\S+/, "Email not valid"]
         },
+        places: { type: [Schema.Types.ObjectId], ref: 'Place'}
     },
     { timestamps: true }
 )
