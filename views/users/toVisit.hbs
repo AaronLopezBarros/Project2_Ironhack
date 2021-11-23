@@ -1,6 +1,8 @@
 <p>To Visit places</p>
     {{#each toVisitPlaces}}
+    {{#if this.photo}}
     <img id="to-visit-img" src="{{this.photo}}" alt="{{this.name}}">
+    {{/if}}
     <ul>
         <li>Name:{{this.name}}</li>
         <li>Destination type:{{this.destinationType}}</li>

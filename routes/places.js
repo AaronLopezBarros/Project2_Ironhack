@@ -48,25 +48,17 @@ router.get('/places/:id', async (req, res, next) => {
 
 //ROUTE TO VISIT PAGE
 router.get('/profile/to-visit', isLoggedIn, async (req, res, next) =>{
-    const usserLogged   = await User.findById(req.session.loggedUser._id).populate('places')
-    const toVisitPlaces = []
-    usserLogged.places.forEach((place) => {
-        if(place.status === 'toVisit'){
-            toVisitPlaces.push(place)
-        }
-    })
+    const usserLogged   = await User.findById(req.session.loggedUser._id).populate('placesToVisit')
+    const toVisitPlaces = usserLogged.placesToVisit
+    
     res.render('users/toVisit', { toVisitPlaces })
 })
 
 //ROUTE ALREADY VISIT PAGE
 router.get('/profile/already-visited', isLoggedIn, async (req, res, next) =>{
-    const usserLogged   = await User.findById(req.session.loggedUser._id).populate('places')
-    const toVisitPlaces = []
-    usserLogged.places.forEach((place) => {
-        if(place.status === 'alreadyVisited'){
-            toVisitPlaces.push(place)
-        }
-    })
+    const usserLogged   = await User.findById(req.session.loggedUser._id).populate('placesAlreadyVisited')
+    const toVisitPlaces = usserLogged.placesAlreadyVisited
+    
     res.render('users/alreadyVisited', { toVisitPlaces })
 })
 
@@ -82,6 +74,7 @@ router.post('/places', async (req, res, next) => {
     })
     const places = axiosCall.data.data
     res.render('places/places', { places })
+    
     } catch(err){
         console.log(chalk.bgRed(err))
     }
@@ -90,66 +83,85 @@ router.post('/places', async (req, res, next) => {
 
 //POST CREATE PLACE
 router.post('/create/:id/:enum', isLoggedIn, async (req, res, next) => {
-    const place = await Place.findOne({cityId: req.params.id})
-    if(place && place.status === req.params.enum ) {
-        const userLogged  = await User.findById(req.session.loggedUser._id,)
-        if(!userLogged.places.includes(place._id)){
-            userLogged.updateOne(
-                { $push: { places: place._id } },
-                { new: true }
-            )
-            await place.updateOne(
-                { $push: { users: userLogged._id} },
-                { new: true }
-            )
-        }
-        
-        res.redirect('/profile')
-        return
-    } 
-    if(!place) {    //|| (place && place.status !== req.params.enum)
-        const axiosCall = await axios(
-            `https://api.roadgoat.com/api/v2/destinations/${req.params.id}`,
-            {
-                headers: {
-                    'Authorization': `Basic ${auth_key}`
-                }
-            })
+    const placeSearch = await Place.find({cityId: req.params.id})
+   if(placeSearch.length === 0) {                                               //The place does not exist
+    const axiosCall = await axios(
+        `https://api.roadgoat.com/api/v2/destinations/${req.params.id}`, {
+                    
+            headers: {
+                'Authorization': `Basic ${auth_key}`
+            }
+        })
         const place = axiosCall.data.data
+        let photo           = null
         if(place.relationships.photos){
             const photoId       = axiosCall.data.data.relationships.photos.data[0].id
             const photoSearch   = axiosCall.data.included
-            let photo           = ''
-              photoSearch.forEach((item) => {
-                  if(item.id === photoId){
-                      photo = item.attributes.image.large
-                  }
-              })
-             const dataToUpload = {
-                 name: place.attributes.long_name,
-                 destinationType: place.attributes.destination_type,
-                 population: place.attributes.population,
-                 averageRating: place.attributes.average_rating,
-                 alternateNames: place.attributes.alternate_names,
-                 photo: photo,
-                 users: [],
-                 status: req.params.enum,
-                 cityId: req.params.id 
-             } 
-             const createPlace = await Place.create(dataToUpload)
-             const userLogged  = await User.findByIdAndUpdate(
-                req.session.loggedUser._id,
-                { $push: { places: createPlace._id } },
+             photoSearch.forEach((item) => {
+                if(item.id === photoId){
+                     photo = item.attributes.image.large
+                }
+            })
+        }
+        const dataToUpload = {
+            name: place.attributes.long_name,
+            destinationType: place.attributes.destination_type,
+            population: place.attributes.population,
+            averageRating: place.attributes.average_rating,
+            alternateNames: place.attributes.alternate_names,
+            photo: photo,
+            users: [],
+            cityId: req.params.id 
+        } 
+        const createPlace = await Place.create(dataToUpload)
+        const userLogged  = await User.findById(req.session.loggedUser._id,)
+        if(req.params.enum === 'toVisit' && !userLogged.placesToVisit.includes(createPlace._id)){
+            await userLogged.updateOne(
+                { $push: { placesToVisit: createPlace._id } },
                 { new: true }
             )
-             await createPlace.updateOne(
-                 { $push: { users: userLogged._id} },
-                 { new: true }
-             )
-             res.redirect('/profile')
-            return
         }
-   }
+        if(req.params.enum === 'alreadyVisited' && !userLogged.placesAlreadyVisited.includes(createPlace._id)){
+            await userLogged.updateOne(
+                { $push: { placesAlreadyVisited: createPlace._id } },
+                { new: true }
+            )
+        }
+        if(!createPlace.users.includes(userLogged._id))
+            await createPlace.updateOne(
+                { $push: { users: userLogged._id} },
+                { new: true }
+             )
+            res.redirect('/profile')
+            return
+        }    
+            
+    if(placeSearch.length > 0) {                                                    //The place exists
+        const userLogged = await User.findById(req.session.loggedUser._id)
+        if(!placeSearch[0].users.includes(userLogged._id)){
+            await placeSearch[0].updateOne(
+                { $push: { users: userLogged._id} },
+                { new: true }
+             )
+        }
+        if(req.params.enum === 'toVisit' && !userLogged.placesToVisit.includes(placeSearch[0]._id)){
+            await userLogged.updateOne(
+                { $push: { placesToVisit: placeSearch[0]._id } },
+                { new: true }
+            )
+        }
+        if(req.params.enum === 'alreadyVisited' && !userLogged.placesAlreadyVisited.includes(placeSearch[0]._id)){
+            await userLogged.updateOne(
+                { $push: { placesAlreadyVisited: placeSearch[0]._id } },
+                { new: true }
+            )
+        }
+        res.redirect('/profile')
+            return
+    }
 })
+
+//ROUTE POST DELETE PLACE
+
 
 module.exports = router

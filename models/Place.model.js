@@ -9,8 +9,7 @@ const placeSchema = new Schema(
         alternateNames: [{ type: String }],
         photo: { type: String },
         users: { type: [Schema.Types.ObjectId], ref: 'User'},
-        status: { type: String, enum: ['toVisit', 'alreadyVisited'] },
-        cityId: { type: String, unique: true }
+        cityId: { type: Number }
     },
     { timestamps: true }
 )
