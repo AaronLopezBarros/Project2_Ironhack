@@ -166,9 +166,13 @@ router.post('/create/:id/:enum', isLoggedIn, async (req, res, next) => {
 router.post('/delete/:id/:enum', async (req, res, next) => {
     const userLogged = await User.findById(req.session.loggedUser._id)
     if(req.params.enum === 'toVisit') {
-     
+      await userLogged.updateOne({ $pull: { 
+        placesToVisit: { _id : req.params.id}
+        }
+    }, { new: true} )
     }
     res.redirect('/')
 })
+
 
 module.exports = router

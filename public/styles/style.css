@@ -11,19 +11,16 @@ nav{
 a{
     text-decoration: none;
     font-family: Roboto;
-    color: black;
+    color: rgb(22, 22, 22);
 }
 a:hover{
-    color: rgb(252 24 97) 
-}
-li{
-    font-family: Roboto;
-    font-weight: 400;
-    color: rgb(252 24 97) 
+    color: rgb(252 24 97) !important
 }
 span{
-    color: black;
+    color: rgb(22, 22, 22);
     font-family: Roboto;
+    font-weight: 100;
+    margin-left: 10px;
 }
 i{
     font-size: 30px;
@@ -34,6 +31,16 @@ form{
 }
 form div{
     margin-bottom: 10px;
+}
+#home-title{
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: 400;
+    font-size: 40px;
+    color: rgb(22, 22, 22);
+    display: flex;
+    justify-content: center;
+    margin-top: 80px;
+    background-color: #f0f0f0;
 }
 #to-visit-img{
     max-width: 500px;
@@ -49,9 +56,26 @@ form div{
     margin-left: 68px;
     color: rgb(252 24 97)
 }
+#title-search{
+    margin-top: 40px;
+    padding-bottom: 10px;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: 400;
+    font-size: 40px;
+    color: rgb(22, 22, 22);
+}
+#img-place-info{
+    width: 800px;
+    margin-bottom: 20px;
+}
 .align-search{
     margin-top: 12px;
-    margin-right: 68px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.width-search{
+    width: fit-content;
 }
 .color-button{
     background-color: rgb(252 24 97);
@@ -65,7 +89,7 @@ form div{
     align-items: center;
     background-color: #f0f0f0;
     margin-top: 30px;
-    padding-top: 10px;
+    padding-top: 10px;  
 }
 .place-img{
     display: flex;
@@ -77,6 +101,13 @@ form div{
     display: flex;  
     margin-top: 10px;
 }
+.title-place-info{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 30px;
+}
+.place-info li{
+    font-weight: 700;
+}
 .button-info{
     margin-top: 20px;
     margin-left: 50px;
@@ -86,16 +117,17 @@ form div{
 .button-info button{
     margin: 20px;
     border-radius: 15px;
-    
+    width: 140px;
 }
 .footer{
     display: flex;
     justify-content: center;
-    margin-top: 200px;
+    margin-top: 100px;
 }
 .footer p{
     font-family: Roboto;
     margin: 10px;
+    color: rgb(22, 22, 22);
 }
 .footer i{
     margin: 10px;
@@ -118,14 +150,50 @@ form div{
     justify-content: center;
 }
 .card-body p{
-    font-family: Roboto;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: 20px;
     text-align: center;
+    color: rgb(22, 22, 22)
 }
 .border-none{
     border:none;
 }
-.card-img-top{
-    /* height: 400px; */
+.card-my-page-img{
+    height: 400px;
+    object-fit: cover;
+    margin-top: 30px;
 }
-
+.card-img{
+    height: 300px;
+    object-fit: cover;
+    margin-top: 20px;
+}
+.title-profile-pages{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 30px;
+    display: flex;
+    justify-content: center;
+    color: rgb(22, 22, 22);
+    background-color: #f0f0f0;
+    margin-top: 10px;
+}
+@media (max-width: 1050px) {
+    #img-place-info{
+        width: 400px;
+    }
+    .button-info{
+        display: flex;
+    }
+    .place-info{
+        display: block;
+    }
+    .button-info button {
+        font-size: 15px;
+    }
+    .place-info ul{
+        font-size: 15px;
+    }
+    .title-place-info{
+        font-size: 20px;
+    }
+}

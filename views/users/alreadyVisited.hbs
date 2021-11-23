@@ -1,18 +1,28 @@
-<p>Already Visited places</p>
-{{#each toVisitPlaces}}
-    <img id="to-visit-img" src="{{this.photo}}" alt="{{this.name}}">
-    <ul>
-        <li>Name:{{this.name}}</li>
-        <li>Destination type:{{this.destinationType}}</li>
-        <li>Population:{{this.population}}</li>
-        <li>Average_rating:{{this.averageRating}}</li>
-        {{#each this.alternateNames}}
-        <ul>
-            <li>Alternate Names:{{this}}</li>
+<p class="title-profile-pages" >Places already visited</p>
+<div class="row">
+    {{#each toVisitPlaces}} 
+    <div class="card border-none" style="width: 25rem;">
+            {{#if this.photo}}
+        <img class="card-img-top card-img" src="{{this.photo}}" alt="{{this.name}}">
+        {{/if}}
+    <div class="card-body">
+        <h5 class="card-title">{{this.name}}</h5>
+        <p class="card-text">
+            <ul>
+                <li>Destination type:{{this.destinationType}}</li>
+                <li>Population:{{this.population}}</li>
+                <li>Average_rating:{{this.averageRating}}</li>
+                {{#each this.alternateNames}}
+                <ul>
+                    <li>Alternate Names:{{this}}</li>
+            </ul>
+                {{/each}}
         </ul>
-        {{/each}}
-    </ul>
-    <form action="/delete/{{this.id}}/alreadyVisited" method="POST">
-        <button type="submit">Delete place</button>
-    </form>
+        </p>
+        <form action="/delete/{{this.id}}/alreadyVisited" method="POST">
+            <button type="submit" class="btn btn-warning">Delete place</button>
+        </form>
+        </div>
+    </div>
     {{/each}}
+</div>
