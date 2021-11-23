@@ -2,9 +2,8 @@
 const router   = require('express').Router()
 const chalk    = require('chalk')
 const axios    = require('axios')
-const auth_key = Buffer.from(`06158c46a81fe6ca54de872a59d59bec:2c9853ff551e804fa5592a697f4661b1`).toString('base64')
+const auth_key = Buffer.from(process.env.API_ACCESS).toString('base64')
 const {isLoggedIn} = require('../middleware/route-guard')
-
 
 //MODELS
 const User  = require('../models/User.model.js')
