@@ -1,10 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300&display=swap');
-img{
-    border: 2px solid black;
-    width: 700px;
-}
+
 nav{
     font-family: Roboto;
     font-weight: light;
@@ -42,7 +39,6 @@ form div{
     max-width: 500px;
 }
 #carousel img{
-    border: none;
     border-radius: 15px;
     
 }
@@ -112,6 +108,24 @@ form div{
     padding-top: 10px;
     color: rgb(252 24 97)
 }
-
-
+.cards-center{
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+.card-body a{
+    display: flex;
+    justify-content: center;
+}
+.card-body p{
+    font-family: Roboto;
+    font-size: 20px;
+    text-align: center;
+}
+.border-none{
+    border:none;
+}
+.card-img-top{
+    /* height: 400px; */
+}
 

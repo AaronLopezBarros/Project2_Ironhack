@@ -8,6 +8,7 @@ const {isLoggedIn} = require('../middleware/route-guard')
 //MODELS
 const User  = require('../models/User.model.js')
 const Place = require('../models/Place.model.js')
+const { collection } = require('../models/User.model.js')
 
 //RENDER PLACES VIEW
 router.get('/places', async (req, res, next) => {
@@ -162,6 +163,12 @@ router.post('/create/:id/:enum', isLoggedIn, async (req, res, next) => {
 })
 
 //ROUTE POST DELETE PLACE
-
+router.post('/delete/:id/:enum', async (req, res, next) => {
+    const userLogged = await User.findById(req.session.loggedUser._id)
+    if(req.params.enum === 'toVisit') {
+     
+    }
+    res.redirect('/')
+})
 
 module.exports = router
