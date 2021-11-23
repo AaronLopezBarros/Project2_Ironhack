@@ -1,13 +1,42 @@
-
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300&display=swap');
 img{
     border: 2px solid black;
+    width: 700px;
 }
 nav{
     font-family: Roboto;
     font-weight: light;
     font-size: 18px;
     background-color: #f0f0f0;
+}
+a{
+    text-decoration: none;
+    font-family: Roboto;
+    color: black;
+}
+a:hover{
+    color: rgb(252 24 97) 
+}
+li{
+    font-family: Roboto;
+    font-weight: 400;
+    color: rgb(252 24 97) 
+}
+span{
+    color: black;
+    font-family: Roboto;
+}
+i{
+    font-size: 30px;
+}
+form{
+    font-family: Roboto;
+    margin-top: 10px;
+}
+form div{
+    margin-bottom: 10px;
 }
 #to-visit-img{
     max-width: 500px;
@@ -31,6 +60,57 @@ nav{
 .color-button{
     background-color: rgb(252 24 97);
     color: white;
+}
+.color-principal{
+    color: rgb(252 24 97);
+}
+.search-result{
+    display: flex;
+    align-items: center;
+    background-color: #f0f0f0;
+    margin-top: 30px;
+    padding-top: 10px;
+}
+.place-img{
+    display: flex;
+    flex-direction:column;
+    align-items: center;
+    margin-top: 50px;
+}
+.place-info{
+    display: flex;  
+    margin-top: 10px;
+}
+.button-info{
+    margin-top: 20px;
+    margin-left: 50px;
+    padding-left: 100px;
+    display: flex;
+}
+.button-info button{
+    margin: 20px;
+    border-radius: 15px;
+    
+}
+.footer{
+    display: flex;
+    justify-content: center;
+    margin-top: 200px;
+}
+.footer p{
+    font-family: Roboto;
+    margin: 10px;
+}
+.footer i{
+    margin: 10px;
+}
+.msg{
+    font-family: Roboto;
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    padding-top: 10px;
+    color: rgb(252 24 97)
 }
 
 

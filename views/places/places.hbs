@@ -1,7 +1,13 @@
-<p>Places</p>
+<div class="align-search">
+    <form class="d-flex" action="/places" method="POST">
+    <input class="form-control me-2" name="name" type="search" placeholder="Search Places" aria-label="Search">
+    <button class="btn color-button" type="submit">Search</button>
+    </form>
+</div>
 {{#each places}}
-<ul>
-    <a href="/places/{{this.id}}"><li>{{this.attributes.long_name}}</li></a> 
-</ul>
+<div class="search-result">
+    <ul>
+        <a href="/places/{{this.id}}"><li>{{this.attributes.long_name}}</li></a> 
+    </ul>
+</div>
 {{/each}}
-

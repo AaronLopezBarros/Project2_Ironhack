@@ -1,22 +1,27 @@
-
+<div class="place-img">
 {{#if photo}}
-<img src="{{photo}}" alt="{{place.attributes.long_name}}">
+    <img src="{{photo}}" alt="{{place.attributes.long_name}}">
 {{/if}}
+<div class="place-info">
+     <ul>
+        <li>Name: <span>{{place.attributes.long_name}}</span> </li>
+        <li>Destination type: <span>{{place.attributes.destination_type}}</span> </li>
+        <li>Population: <span>{{place.attributes.population}}</span> </li>
+        <li>Average_rating: <span>{{place.attributes.average_rating}}</span> </li>
+    {{#each place.attributes.alternate_names}}
     <ul>
-        <li>Name:{{place.attributes.long_name}}</li>
-        <li>Destination type:{{place.attributes.destination_type}}</li>
-        <li>Population:{{place.attributes.population}}</li>
-        <li>Average_rating:{{place.attributes.average_rating}}</li>
-        {{#each place.attributes.alternate_names}}
-        <ul>
-            <li>Alternate Names:{{this}}</li>
-        </ul>
-        {{/each}}
+        <li>Alternate Names: <span>{{this}}</span> </li>
     </ul>
-    <form action="/create/{{place.id}}/toVisit" method="POST">
+    {{/each}}
+    </ul>
+  <div class="button-info">
+      <form action="/create/{{place.id}}/toVisit" method="POST">
         <button type="submit">To Visit</button>
     </form>
     <form action="/create/{{place.id}}/alreadyVisited" method="POST">
         <button type="submit">Already Visited</button>
     </form>
+  </div>  
+</div>
+</div>
 
