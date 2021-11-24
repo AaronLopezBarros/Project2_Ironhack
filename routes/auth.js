@@ -1,10 +1,9 @@
-//Variables
+//VARIABLES
 const router         = require('express').Router()
 const bcrypt         = require('bcryptjs')
 const chalk          = require('chalk')
-const { isLoggedIn } = require('../middleware/route-guard')
 
-//Models
+//MODELS
 const User = require('../models/User.model')
 
 //RENDER SIGNUP VIEW
@@ -94,7 +93,7 @@ router.post('/login', async (req, res, next) => {
 })
 
 //POST LOGOUT
-router.get('/logout', isLoggedIn, async (req, res, next) => {
+router.get('/logout', async (req, res, next) => {
     res.clearCookie('connect.sid', { path: '/' })
   
     try {

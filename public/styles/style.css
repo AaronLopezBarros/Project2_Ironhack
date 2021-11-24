@@ -35,7 +35,7 @@ form div{
 #home-title{
     font-family:Verdana, Geneva, Tahoma, sans-serif;
     font-weight: 400;
-    font-size: 35px;
+    font-size: 30px;
     color: rgb(22, 22, 22);
     display: flex;
     justify-content: center;
@@ -68,8 +68,12 @@ form div{
     width: 800px;
     margin-bottom: 20px;
 }
+.user-example{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 13px;
+    color: rgba(22, 22, 22, 0.658);
+}
 .align-search{
-    margin-top: 12px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -97,8 +101,11 @@ form div{
     align-items: center;
     margin-top: 50px;
 }
+.flex{
+    display: flex;
+}
 .place-info{
-    display: flex;  
+    /* display: flex;   */
     margin-top: 10px;
 }
 .title-place-info{
@@ -177,9 +184,16 @@ form div{
     background-color: #f0f0f0;
     margin-top: 10px;
 }
+.buttons-to-visit-page{
+    display: flex;
+    justify-content: space-between;
+}
 @media (max-width: 1050px) {
     #img-place-info{
         width: 400px;
+    }
+    .flex{
+        display: inline;
     }
     .button-info{
         display: flex;
@@ -195,5 +209,49 @@ form div{
     }
     .title-place-info{
         font-size: 20px;
+    }
+}
+@media (max-width: 500px) {
+    #home-title{
+        font-size: 15px;
+    }
+    
+    #title-search{
+        font-size: 20px;
+        text-align: center;
+    }
+    #img-place-info{
+        width: 300px;
+    }
+    .footer{
+        margin-top: 150px;
+        font-size: 13px;
+    }
+    .button-info{
+        flex-direction: column;
+    }
+    .card-my-page-img{
+        height: 200px;
+    }
+    .card-body p{
+        font-size: 15px;
+    }
+    .card-body a{
+        font-size: 13px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+    }
+    .title-profile-pages{
+        font-size: 20px;
+    }
+    .card-img{
+        height: 200px;
+    }
+    .card-body li{
+        font-size: 15px;
+    }
+    .card-body button{
+        font-size: 14px;
     }
 }

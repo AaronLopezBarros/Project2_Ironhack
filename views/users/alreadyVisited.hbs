@@ -9,18 +9,19 @@
         <h5 class="card-title">{{this.name}}</h5>
         <p class="card-text">
             <ul>
-                <li>Destination type:{{this.destinationType}}</li>
-                <li>Population:{{this.population}}</li>
-                <li>Average_rating:{{this.averageRating}}</li>
+                <li>Destination type: <span>{{this.destinationType}}</span> </li>
+                <li>Population: <span>{{this.population}}</span> </li>
+                <li>Average_rating: <span>{{this.averageRating}}</span> </li>
+                <li>Alternate Names:</li>
                 {{#each this.alternateNames}}
                 <ul>
-                    <li>Alternate Names:{{this}}</li>
+                    <li> <span>{{this}}</span> </li>
             </ul>
                 {{/each}}
         </ul>
         </p>
         <form action="/delete/{{this.id}}/alreadyVisited" method="POST">
-            <button type="submit" class="btn btn-warning">Delete place</button>
+            <button type="submit" class="btn btn-warning">Delete</button>
         </form>
         </div>
     </div>

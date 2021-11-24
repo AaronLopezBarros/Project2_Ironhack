@@ -3,7 +3,8 @@
 {{#if photo}}
     <img id="img-place-info" src="{{photo}}" alt="{{place.attributes.long_name}}">
 {{/if}}
-<div class="place-info">
+<div class="flex">
+  <div class="place-info">
      <ul>
         <li>Destination type: <span>{{place.attributes.destination_type}}</span> </li>
         <li>Population: <span>{{place.attributes.population}}</span> </li>
@@ -15,6 +16,7 @@
                 {{/each}}
             </ul>
     </ul>
+   </div> 
   <div class="button-info">
       <form action="/create/{{place.id}}/toVisit" method="POST">
       <button type="submit" class="btn color-button">To Visit</button>

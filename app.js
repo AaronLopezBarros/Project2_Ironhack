@@ -28,6 +28,14 @@ app.use(express.static(__dirname + '/public'))
 //MIDDLEWARE OF SESSIONS
 require("./config/session.config")(app)
 
+//ROUTE FOR CHECK IS USER LOGGED
+app.use((req, res, next) => {
+    if (req.session.loggedUser) {
+       res.locals.session = req.session
+    }
+    next()
+  })
+
 //ROUTES🚀
 app.use('/', require('./routes/home'))
 app.use('/', require('./routes/auth'))

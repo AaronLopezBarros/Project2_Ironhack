@@ -8,7 +8,6 @@ const {isLoggedIn} = require('../middleware/route-guard')
 //MODELS
 const User  = require('../models/User.model.js')
 const Place = require('../models/Place.model.js')
-const { collection } = require('../models/User.model.js')
 
 //RENDER PLACES VIEW
 router.get('/places', async (req, res, next) => {
@@ -60,7 +59,7 @@ router.get('/profile/already-visited', isLoggedIn, async (req, res, next) =>{
     const usserLogged   = await User.findById(req.session.loggedUser._id).populate('placesAlreadyVisited')
     const toVisitPlaces = usserLogged.placesAlreadyVisited
     
-    res.render('users/alreadyVisited', { toVisitPlaces })
+    res.render('users/alreadyVisited', { toVisitPlaces, })
 })
 
 //POST ROUTE FOR SEARCH PLACES
@@ -74,6 +73,7 @@ router.post('/places', async (req, res, next) => {
         }
     })
     const places = axiosCall.data.data
+    console.log(places)
     res.render('places/places', { places })
     
     } catch(err){
@@ -164,15 +164,55 @@ router.post('/create/:id/:enum', isLoggedIn, async (req, res, next) => {
 
 //ROUTE POST DELETE PLACE
 router.post('/delete/:id/:enum', async (req, res, next) => {
-    const userLogged = await User.findById(req.session.loggedUser._id)
-    if(req.params.enum === 'toVisit') {
-      await userLogged.updateOne({ $pull: { 
-        placesToVisit: { _id : req.params.id}
+    const userLogged  = await User.findById(req.session.loggedUser._id)
+    const placeId = req.params.id
+        if(req.params.enum === 'toVisit') {
+          await userLogged.updateOne(
+              { $pull: { placesToVisit: placeId} },
+              { new: true} )
+          const deletedResult = await Place.findByIdAndUpdate(
+              placeId,
+              { $pull: { users: userLogged._id} },
+              { new: true }
+         )      
+          if(deletedResult.users.length === 0){
+              await Place.findByIdAndDelete(
+                  placeId
+              )
+          }
         }
-    }, { new: true} )
-    }
-    res.redirect('/')
+        if(req.params.enum === 'alreadyVisited') {
+            await userLogged.updateOne(
+                { $pull: { placesAlreadyVisited: placeId} },
+                { new: true} )
+            const deletedResult = await Place.findByIdAndUpdate(
+                placeId,
+                { $pull: { users: userLogged._id}},
+                { new: true }
+            )  
+            if(deletedResult.users.length === 0){
+                await Place.findByIdAndDelete(
+                    placeId
+                )
+            }
+        }
+    res.redirect('/profile')
 })
 
+//ROUTE UPDATE TO VISIT - ALREADY VISITED
+router.post('/update/:id', async (req, res, next) => {
+    const userLogged = await User.findById(req.session.loggedUser._id)
+    const placeId    = req.params.id
+    await userLogged.updateOne(
+        { $pull: { placesToVisit: placeId } },
+        { new: true }
+    )
+    await userLogged.updateOne(
+        { $push: { placesAlreadyVisited: placeId } },
+        { new: true }
+    )
+    res.redirect('/profile')
+})
 
 module.exports = router
+
