@@ -5,29 +5,29 @@
             {{#if this.photo}}
         <img class="card-img-top card-img" src="{{this.photo}}" alt="{{this.name}}">
         {{/if}}
-    <div class="card-body">
-        <h5 class="card-title">{{this.name}}</h5>
-        <p class="card-text">
-            <ul>
-                <li>Destination type: <span>{{this.destinationType}}</span></li>
-                <li>Population: <span>{{this.population}}</span> </li>
-                <li>Average_rating: <span>{{this.averageRating}}</span> </li>
-                <li>Alternate Names:</li>
-                {{#each this.alternateNames}}
+        <div class="card-body">
+            <h5 class="card-title">{{this.name}}</h5>
+            <p class="card-text">
                 <ul>
-                    <li> <span>{{this}}</span> </li>
+                    <li>Destination type: <span>{{this.destinationType}}</span></li>
+                    <li>Population: <span>{{this.population}}</span> </li>
+                    <li>Average_rating: <span>{{ratingFixed this.averageRating}}</span> </li>
+                    <li>Alternate Names:</li>
+                    {{#each this.alternateNames}}
+                    <ul>
+                        <li> <span>{{this}}</span> </li>
+                </ul>
+                    {{/each}}
             </ul>
-                {{/each}}
-        </ul>
-        </p>
-            <div class="buttons-to-visit-page">
-                <form action="/delete/{{this.id}}/toVisit" method="POST">
-                    <button type="submit" class="btn btn-warning">Delete</button>
-                </form>
-                <form action="/update/{{this.id}}" method="POST">
-                    <button type="submit" class="btn color-button">Already visited</button>
-                </form>
-            </div>
+            </p>
+                <div class="buttons-to-visit-page">
+                    <form action="/delete/{{this.id}}/toVisit" method="POST">
+                        <button type="submit" class="btn btn-warning">Delete</button>
+                    </form>
+                    <form action="/update/{{this.id}}" method="POST">
+                        <button type="submit" class="btn color-button">Already visited</button>
+                    </form>
+                </div>
         </div>
     </div>
     {{/each}}

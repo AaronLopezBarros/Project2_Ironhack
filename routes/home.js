@@ -1,6 +1,7 @@
 //VARIABLES
 const router = require('express').Router()
 const {isLoggedIn} = require('../middleware/route-guard')
+
 //GET HOME PAGE
 router.get('/', (req, res, next) => {
     res.render('home')
@@ -10,7 +11,5 @@ router.get('/', (req, res, next) => {
 router.get('/profile', isLoggedIn, (req, res, next) => {
     res.render('users/myPage')
 })
-
-
 
 module.exports = router

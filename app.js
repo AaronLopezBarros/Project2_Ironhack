@@ -28,6 +28,11 @@ app.use(express.static(__dirname + '/public'))
 //MIDDLEWARE OF SESSIONS
 require("./config/session.config")(app)
 
+//HELPER HBS
+hbs.registerHelper('ratingFixed', (rating) => {
+    return rating.toFixed(2)
+})
+
 //ROUTE FOR CHECK IS USER LOGGED
 app.use((req, res, next) => {
     if (req.session.loggedUser) {

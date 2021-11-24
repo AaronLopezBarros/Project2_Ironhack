@@ -25,9 +25,9 @@ router.get('/places/:id', async (req, res, next) => {
                 }
             }) 
         const place = axiosCall.data.data
-        if(place.relationships.photos){
+        if(place.relationships.photos){                  
             const photoId       = place.relationships.photos.data[0].id
-            const photoSearch   = axiosCall.data.included
+            const photoSearch   = axiosCall.data.included                       //Logic to save the url of the images in a variable, because the api doesn't give it with the rest of the information.
             let photo           = {}
               photoSearch.forEach((item) => {
                   if(item.id === photoId){
@@ -52,7 +52,7 @@ router.get('/profile/to-visit', isLoggedIn, async (req, res, next) =>{
     const toVisitPlaces = usserLogged.placesToVisit
     
     res.render('users/toVisit', { toVisitPlaces })
-})
+})                                                                                                                     //Render the profile views, and populate each of the corresponding arrays
 
 //ROUTE ALREADY VISIT PAGE
 router.get('/profile/already-visited', isLoggedIn, async (req, res, next) =>{
@@ -97,7 +97,7 @@ router.post('/create/:id/:enum', isLoggedIn, async (req, res, next) => {
         let photo           = null
         if(place.relationships.photos){
             const photoId       = axiosCall.data.data.relationships.photos.data[0].id
-            const photoSearch   = axiosCall.data.included
+            const photoSearch   = axiosCall.data.included                                   //Logic to save the url of the images again
              photoSearch.forEach((item) => {
                 if(item.id === photoId){
                      photo = item.attributes.image.large
@@ -114,7 +114,7 @@ router.post('/create/:id/:enum', isLoggedIn, async (req, res, next) => {
             users: [],
             cityId: req.params.id 
         } 
-        const createPlace = await Place.create(dataToUpload)
+        const createPlace = await Place.create(dataToUpload)                                                        //Create the place
         const userLogged  = await User.findById(req.session.loggedUser._id,)
         if(req.params.enum === 'toVisit' && !userLogged.placesToVisit.includes(createPlace._id)){
             await userLogged.updateOne(
@@ -122,7 +122,7 @@ router.post('/create/:id/:enum', isLoggedIn, async (req, res, next) => {
                 { new: true }
             )
         }
-        if(req.params.enum === 'alreadyVisited' && !userLogged.placesAlreadyVisited.includes(createPlace._id)){
+        if(req.params.enum === 'alreadyVisited' && !userLogged.placesAlreadyVisited.includes(createPlace._id)){             //Check the button that the user uses and push the place to the corresponding user array, also push the user to the place array
             await userLogged.updateOne(
                 { $push: { placesAlreadyVisited: createPlace._id } },
                 { new: true }
@@ -145,7 +145,7 @@ router.post('/create/:id/:enum', isLoggedIn, async (req, res, next) => {
                 { new: true }
              )
         }
-        if(req.params.enum === 'toVisit' && !userLogged.placesToVisit.includes(placeSearch[0]._id)){
+        if(req.params.enum === 'toVisit' && !userLogged.placesToVisit.includes(placeSearch[0]._id)){                    //Only push to arrays without creating the location
             await userLogged.updateOne(
                 { $push: { placesToVisit: placeSearch[0]._id } },
                 { new: true }
@@ -178,7 +178,7 @@ router.post('/delete/:id/:enum', async (req, res, next) => {
           if(deletedResult.users.length === 0){
               await Place.findByIdAndDelete(
                   placeId
-              )
+              )                                                           //When the user clicks on delete, we delete the place from the corresponding array, and the user from the array of users of the place, if the place has no users in its array it is also deleted                   
           }
         }
         if(req.params.enum === 'alreadyVisited') {
@@ -204,7 +204,7 @@ router.post('/update/:id', async (req, res, next) => {
     const userLogged = await User.findById(req.session.loggedUser._id)
     const placeId    = req.params.id
     await userLogged.updateOne(
-        { $pull: { placesToVisit: placeId } },
+        { $pull: { placesToVisit: placeId } },                                  //When the user changes the status of a place, we remove the place from the to visit array and push it to the already visited array
         { new: true }
     )
     await userLogged.updateOne(

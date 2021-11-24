@@ -1,3 +1,4 @@
+//PLACE MODEL
 const { Schema, model } = require('mongoose')
 
 const placeSchema = new Schema(
