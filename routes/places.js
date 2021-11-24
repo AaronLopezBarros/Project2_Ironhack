@@ -36,7 +36,7 @@ router.get('/places/:id', async (req, res, next) => {
               })
               res.render('places/placeInfo', { place, photo })
         } else {
-            res.render('places/placeInfo', { place })
+              res.render('places/placeInfo', { place })
         }
 
         
@@ -73,7 +73,6 @@ router.post('/places', async (req, res, next) => {
         }
     })
     const places = axiosCall.data.data
-    console.log(places)
     res.render('places/places', { places })
     
     } catch(err){
