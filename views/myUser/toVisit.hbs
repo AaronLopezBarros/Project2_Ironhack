@@ -1,4 +1,4 @@
-<p class="title-profile-pages" >Places to visit of {{user.username}}</p>
+<p class="title-profile-pages" >Places to visit</p>
 <div class="row container">
     {{#each toVisitPlaces}} 
     <div class="card border-none container" style="width: 25rem;">
@@ -20,8 +20,21 @@
                     {{/each}}
             </ul>
             </p>
+                <div class="buttons-to-visit-page">
+                    <form action="/delete/{{this.id}}/toVisit" method="POST">
+                        <button type="submit" class="btn btn-warning">Delete</button>
+                    </form>
+                    <form action="/update/{{this.id}}" method="POST">
+                        <button type="submit" class="btn color-button">Already visited</button>
+                    </form>
+                </div>
         </div>
     </div>
     {{/each}}
 </div>
     
+    
+    
+
+
+

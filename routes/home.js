@@ -9,7 +9,7 @@ router.get('/', (req, res, next) => {
 
 //ROUTE TO THE PROFILE PAGE
 router.get('/profile', isLoggedIn, (req, res, next) => {
-    res.render('users/myPage')
+    res.render('myUser/myPage')
 })
 
 module.exports = router

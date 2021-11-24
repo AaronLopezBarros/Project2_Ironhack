@@ -1,18 +1,18 @@
 <form action="/login" method="POST">
     <div class="form-group">
         <label>Username</label>
-        <input type="text" name="username" class="form-control" id="exampleInputEmail1" placeholder="Enter username">
+        <input type="text" name="username" class="form-control"  placeholder="Enter username">
     </div>
     <p class="user-example">(User example: Pepito22, 12345678)</p>
     <div class="form-group">
         <label>Password</label>
-        <input type="password" name="password" class="form-control" id="exampleInputEmail1" placeholder="Enter password">
+        <input type="password" name="password" class="form-control"  placeholder="Enter password">
     </div>
   <button type="submit" class="btn color-button">Log in</button>
 </form> 
 
-<div class="msg">
 {{#if msg}}
+<div class="msg">
     <p>{{msg}}</p>
-{{/if}}
 </div>
+{{/if}}

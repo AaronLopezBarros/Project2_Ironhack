@@ -1,6 +1,6 @@
-<p class="title-profile-pages" >Places already visited</p>
+<p class="title-profile-pages" >Places already visited of {{user.username}}</p>
 <div class="row">
-    {{#each toVisitPlaces}} 
+    {{#each alreadyVisitedPlaces}} 
     <div class="card border-none" style="width: 25rem;">
         {{#if this.photo}}
         <img class="card-img-top card-img" src="{{this.photo}}" alt="{{this.name}}">
@@ -20,9 +20,6 @@
                     {{/each}}
                 </ul>
             </p>
-            <form action="/delete/{{this.id}}/alreadyVisited" method="POST">
-                <button type="submit" class="btn btn-warning">Delete</button>
-            </form>
         </div>
     </div>
     {{/each}}

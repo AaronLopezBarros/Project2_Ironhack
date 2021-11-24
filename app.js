@@ -45,6 +45,7 @@ app.use((req, res, next) => {
 app.use('/', require('./routes/home'))
 app.use('/', require('./routes/auth'))
 app.use('/', require('./routes/places'))
+app.use('/users', require('./routes/users'))
 
 //APP LISTENER
 app.listen(PORT, () => {

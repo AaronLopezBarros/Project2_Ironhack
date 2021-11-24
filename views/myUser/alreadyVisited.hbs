@@ -1,27 +1,29 @@
-<p class="title-profile-pages" >Places to visit of {{user.username}}</p>
-<div class="row container">
-    {{#each toVisitPlaces}} 
-    <div class="card border-none container" style="width: 25rem;">
-            {{#if this.photo}}
+<p class="title-profile-pages" >Places already visited</p>
+<div class="row">
+    {{#each alreadyVisitedPlaces}} 
+    <div class="card border-none" style="width: 25rem;">
+        {{#if this.photo}}
         <img class="card-img-top card-img" src="{{this.photo}}" alt="{{this.name}}">
         {{/if}}
         <div class="card-body">
             <h5 class="card-title">{{this.name}}</h5>
             <p class="card-text">
                 <ul>
-                    <li>Destination type: <span>{{this.destinationType}}</span></li>
+                    <li>Destination type: <span>{{this.destinationType}}</span> </li>
                     <li>Population: <span>{{this.population}}</span> </li>
                     <li>Average_rating: <span>{{ratingFixed this.averageRating}}</span> </li>
                     <li>Alternate Names:</li>
                     {{#each this.alternateNames}}
                     <ul>
-                        <li> <span>{{this}}</span> </li>
-                </ul>
+                    <li> <span>{{this}}</span> </li>
+                    </ul>
                     {{/each}}
-            </ul>
+                </ul>
             </p>
+            <form action="/delete/{{this.id}}/alreadyVisited" method="POST">
+                <button type="submit" class="btn btn-warning">Delete</button>
+            </form>
         </div>
     </div>
     {{/each}}
 </div>
-    

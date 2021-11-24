@@ -43,6 +43,11 @@
             <li class="nav-item">
               <a class="nav-link" href="/logout">Log out</a>
             </li>
+              <form class="search-home" action="/users" method="POST">
+                <input class="form-control me-2 width-input" name="name" type="search" placeholder="Search users, example: Pablo33" aria-label="Search">
+                <button class="btn color-button" type="submit">Search</button>
+              </form>
+             </form>
             {{else}}
             <li class="nav-item">
               <a class="nav-link" href="/login">Log in</a>

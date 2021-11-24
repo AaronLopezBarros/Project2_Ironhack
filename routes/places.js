@@ -46,21 +46,21 @@ router.get('/places/:id', async (req, res, next) => {
    
 })
 
-//ROUTE TO VISIT PAGE
-router.get('/profile/to-visit', isLoggedIn, async (req, res, next) =>{
-    const usserLogged   = await User.findById(req.session.loggedUser._id).populate('placesToVisit')
-    const toVisitPlaces = usserLogged.placesToVisit
+//ROUTE TO RENDER MY PLACES
+router.get('/profile/:enum', isLoggedIn, async (req, res, next) =>{
+    if(req.params.enum === 'to-visit'){
+        const userLogged    = await User.findById(req.session.loggedUser._id).populate('placesToVisit')
+        const toVisitPlaces = userLogged.placesToVisit
     
-    res.render('users/toVisit', { toVisitPlaces })
-})                                                                                                                     //Render the profile views, and populate each of the corresponding arrays
-
-//ROUTE ALREADY VISIT PAGE
-router.get('/profile/already-visited', isLoggedIn, async (req, res, next) =>{
-    const usserLogged   = await User.findById(req.session.loggedUser._id).populate('placesAlreadyVisited')
-    const toVisitPlaces = usserLogged.placesAlreadyVisited
+        res.render('myUser/toVisit', { toVisitPlaces })                                                                 //Render the profile views, and populate each of the corresponding arrays
+    }
+    if(req.params.enum === 'already-visited' ){
+        const userLogged    = await User.findById(req.session.loggedUser._id).populate('placesAlreadyVisited')
+        const alreadyVisitedPlaces = userLogged.placesAlreadyVisited
     
-    res.render('users/alreadyVisited', { toVisitPlaces, })
-})
+        res.render('myUser/alreadyVisited', { alreadyVisitedPlaces })
+    }
+})                                                                                                                     
 
 //POST ROUTE FOR SEARCH PLACES
 router.post('/places', async (req, res, next) => {

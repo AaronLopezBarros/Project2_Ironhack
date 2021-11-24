@@ -68,6 +68,13 @@ form div{
     width: 800px;
     margin-bottom: 20px;
 }
+.search-home{
+    display: flex;
+    padding-left: 10px;
+}
+.width-input{
+    width: 300px;
+}
 .user-example{
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: 13px;
@@ -145,7 +152,8 @@ form div{
     display: flex;
     justify-content: center;
     padding-top: 10px;
-    color: rgb(252 24 97)
+    color: rgb(252 24 97);
+    margin-top: 10px;
 }
 .cards-center{
     display: flex;
