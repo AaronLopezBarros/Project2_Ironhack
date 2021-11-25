@@ -50,11 +50,9 @@ form div{
     
 }
 #traveller-title{
-    font-family: Roboto;
-    font-size: 30px;
-    font-weight: bold;
-    margin-left: 68px;
-    color: rgb(252 24 97)
+   max-width: 150px;
+   margin-left: 20px;
+   margin-right: 20px;
 }
 #title-search{
     margin-top: 40px;
