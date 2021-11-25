@@ -5,12 +5,12 @@ require('dotenv/config')
 require('./db/index')
 
 //VARIABLES
-const PORT     = process.env.PORT || 3000
-const express  = require('express')
-const app      = express()
-const hbs      = require('hbs')
-const mongoose = require('mongoose')
-const chalk    = require('chalk')
+const PORT         = process.env.PORT || 3000
+const express      = require('express')
+const app          = express()
+const hbs          = require('hbs')
+const mongoose     = require('mongoose')
+const chalk        = require('chalk')
 const cookieParser = require("cookie-parser")
 
 //MIDDLEWARE FOR HBS

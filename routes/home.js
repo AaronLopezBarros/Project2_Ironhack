@@ -1,5 +1,5 @@
 //VARIABLES
-const router = require('express').Router()
+const router       = require('express').Router()
 const {isLoggedIn} = require('../middleware/route-guard')
 
 //GET HOME PAGE

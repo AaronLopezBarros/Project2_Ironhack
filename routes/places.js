@@ -1,8 +1,8 @@
 //VARIABLES
-const router   = require('express').Router()
-const chalk    = require('chalk')
-const axios    = require('axios')
-const auth_key = Buffer.from(`${process.env.API_KEY}:${process.env.SECRET_KEY}`).toString('base64')
+const router       = require('express').Router()
+const chalk        = require('chalk')
+const axios        = require('axios')
+const auth_key     = Buffer.from(`${process.env.API_KEY}:${process.env.SECRET_KEY}`).toString('base64')
 const {isLoggedIn} = require('../middleware/route-guard')
 
 //MODELS

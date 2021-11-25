@@ -1,6 +1,6 @@
 //VARIABLES
-const router = require('express').Router()
-const chalk    = require('chalk')
+const router       = require('express').Router()
+const chalk        = require('chalk')
 const {isLoggedIn} = require('../middleware/route-guard')
 
 //MODELS
