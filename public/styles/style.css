@@ -202,6 +202,9 @@ form div{
     #img-place-info{
         width: 400px;
     }
+    #title-search{
+        text-align: center;
+    }
     .flex{
         display: inline;
     }
@@ -234,7 +237,8 @@ form div{
         width: 300px;
     }
     .search-home{
-        display: block;
+        display: flex;
+        width: 50px;
     }
     .footer{
         margin-top: 150px;
