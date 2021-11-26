@@ -223,6 +223,9 @@ form div{
     .title-place-info{
         font-size: 20px;
     }
+    .align-center{
+        justify-content: center;
+    }
 }
 @media (max-width: 500px) {
     #home-title{
