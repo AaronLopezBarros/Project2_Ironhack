@@ -21,5 +21,6 @@ profile page, and can also search for other users to see their destinations.
 
 Link to app:
 
-https://my-app-traveller.herokuapp.com/
+![Traveller](https://user-images.githubusercontent.com/92530312/144423297-5761c300-191f-45c0-879d-deeb62b77122.png)
 
+https://my-app-traveller.herokuapp.com/
