@@ -19,8 +19,6 @@ The project is a full-stack web application (Traveller) developed with NodeJS, E
 Traveller is a travel website where the user can search for information about destinations, and add them to his profile page. 
 profile page, and can also search for other users to see their destinations.
 
-Translated with www.DeepL.com/Translator (free version)
-
 Link to app:
 
 https://my-app-traveller.herokuapp.com/
